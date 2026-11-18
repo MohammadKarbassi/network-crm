@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div dir="rtl">
 
-## Getting Started
+# نتورک — نرم‌افزار مدیریت ارتباط با مشتری (CRM)
 
-First, run the development server:
+پروژهٔ پایانی بوت‌کمپ مهندسی هوش مصنوعی. یک CRM فارسی و راست‌چین برای تیم‌های فروش، با ورود پیامکی، پایپ‌لاین کانبان، کمپین و اتوماسیون از طریق صف، و دستیار هوش مصنوعی.
+
+نسخهٔ دیپلوی‌شده: https://network-crm.liara.run
+
+## امکانات
+
+| بخش | توضیح |
+|---|---|
+| ورود | فقط با کد یکبارمصرف پیامکی (کاوه‌نگار). کد هش‌شده در Redis، ۲ دقیقه اعتبار، محدودیت ارسال و تلاش |
+| سطح دسترسی | ادمین، مدیر فروش، کارشناس فروش. کارشناس فقط رکوردهای خودش را می‌بیند |
+| مشتری و لید | افزودن/ویرایش/حذف، منبع، وضعیت و اولویت، تخصیص به کارشناس، تایم‌لاین فعالیت، تبدیل لید به مشتری با انتقال تاریخچه، امتیاز لید |
+| پایپ‌لاین فروش | کانبان ۶ مرحله‌ای با drag & drop (موس، لمس، کیبورد) و جمع مبلغ هر ستون |
+| تسک و تقویم | فهرست (عقب‌افتاده، امروز، پیش رو) و تقویم ماهانهٔ شمسی؛ مدیر برای کارشناس تسک تعریف می‌کند |
+| داشبورد | فروش هفته/ماه با مقایسه، نمودار فروش ماهانه، پایپ‌لاین باز، منبع لیدها، جدول عملکرد تیم |
+| پیامک و ایمیل | ارسال تکی از صفحهٔ مشتری/لید و کمپین گروهی با فیلتر مخاطب، همه از طریق صف BullMQ |
+| اتوماسیون | الگوهای آماده و بیلدر بصری؛ رویداد (لید جدید، تغییر وضعیت، تغییر مرحلهٔ معامله، مشتری جدید) ← پیامک، ایمیل، انتظار، تسک |
+| هوش مصنوعی | یادداشت هوشمند (پیشنهاد تسک/معامله/وضعیت از یادداشت آزاد)، خلاصهٔ مشتری با ریسک و قدم بعدی، نوشتن متن پیام |
+
+## پشتهٔ فنی
+
+Next.js 16 (App Router، Server Actions) · TypeScript · shadcn/ui + Tailwind 4 · PostgreSQL + Prisma 7 · Redis · BullMQ · Zod · Recharts · dnd-kit · Vitest
+
+سرویس‌ها: کاوه‌نگار (پیامک)، SMTP (ایمیل)، هوش مصنوعی ابرآروان (سازگار با OpenAI)
+
+## معماری در یک نگاه
+
+- `src/app/(app)/*` صفحه‌ها و Server Actionهای هر بخش. هر اکشن ورودی را با Zod اعتبارسنجی و دسترسی را با `requireUser` و `ownedBy` بررسی می‌کند.
+- `src/server/` منطق سمت سرور: سشن، صف‌ها، اتوماسیون، داشبورد، کلاینت‌های کاوه‌نگار، ایمیل و AI.
+- `src/server/queue/` دو صف: `messages` (OTP، پیام، کمپین) و `automations` (هر مرحله یک جاب؛ «انتظار» = جاب تأخیری). worker در `src/instrumentation.ts` داخل همان سرور اجرا می‌شود.
+- `src/lib/` کدهای مشترک سرور و کلاینت: برچسب‌ها، اسکیماها، امتیاز لید، قالب پیام.
+- هوش مصنوعی هیچ‌وقت مستقیم داده را تغییر نمی‌دهد: خروجی با JSON Schema سخت‌گیرانه (ساخته از Zod) گرفته و دوباره اعتبارسنجی می‌شود و فقط پس از تأیید کاربر اعمال می‌شود.
+
+## اجرای محلی
 
 ```bash
+docker compose up -d          # PostgreSQL و Redis
+cp .env.example .env          # و مقادیر را پر کنید
+npm install
+npx prisma migrate dev
+npm run db:seed               # ساخت ادمین از SEED_ADMIN_PHONE
+npm run db:seed:demo          # اختیاری: دادهٔ نمایشی
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+تست‌ها: `npm test` · بررسی نوع: `npm run typecheck` · lint: `npm run lint`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`MESSAGING_ALLOWLIST` در حالت آزمایشی ارسال واقعی را به گیرنده‌های فهرست محدود می‌کند (دادهٔ نمایشی شماره‌های تصادفی دارد). در محیط واقعی خالی بماند.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+</div>
