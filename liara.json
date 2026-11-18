@@ -1,0 +1,5 @@
+{
+  "app": "network-crm",
+  "platform": "next",
+  "port": 3000
+}
