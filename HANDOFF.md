@@ -87,10 +87,22 @@
 - [x] «نوشتن با هوش مصنوعی» در دیالوگ ارسال پیام و فرم کمپین (با `{{name}}`)
 - [x] تست واقعی: یادداشت «بودجه ۸۰ میلیون، تا پنجشنبه پیش‌فاکتور» → معامله PROPOSAL ۸۰M + تسک موعد 2026-11-26 (پنجشنبهٔ بعد) در دیتابیس؛ خلاصه دقیق بود؛ پیامک کمپین ۱۱۴ حرف با placeholder
 
+- [x] GitHub عمومی: https://github.com/MohammadKarbassi/network-crm
+- [x] لیارا: شبکهٔ خصوصی `network-crm-net`، اپ `network-crm` (medium-g2، bundle basic)، `network-crm-db` (Postgres 17.10)، `network-crm-redis` (Redis 7.2.3)، همه small-g2/basic؛ ۱۶ env؛ مایگریشن و seed ادمین از سیستم توسعه با شبکهٔ عمومی موقت؛ دیپلوی موفق، `/login` روی https://network-crm.liara.run پاسخ ۲۰۰، worker صف بالا آمد
+
 ## قدم بعدی
-1. ثبت در گیت و ساخت ریپوی GitHub (`.env` نباید برود؛ چک شده که ignore است)
-2. دیپلوی روی لیارا (`network-crm`): Postgres و Redis لیارا، env ها، `prisma migrate deploy`، seed ادمین؛ تست دسترسی لیارا به ابرآروان، کاوه‌نگار و Exchange
-3. قبل از دمو: اتوماسیون تستی «خوشامد لید جدید» انتظارش ۱ دقیقه است؛ به ۱ روز برگردد
+1. کاربر شبکهٔ عمومی `network-crm-db` را خاموش کند
+2. کاربر روی سایت زنده با پیامک وارد شود؛ سپس تست ایمیل (دسترسی لیارا به Exchange) و AI ابرآروان از سرور لیارا
+3. **زیردامنهٔ پیش‌فرض لیارا فقط یک هفته بعد از اولین دیپلوی (2026-11-19) معتبر است**؛ برای داوری دامنه متصل شود
+4. ویدئوی دمو؛ قبل از آن انتظار اتوماسیون تستی محلی به ۱ روز برگردد (روی لیارا اتوماسیونی ساخته نشده)
+
+## نکته‌های لیارا
+- لیارا `next.config` را بازنویسی می‌کند (standalone): Tailwind با `postcss.config.mjs` است نه rule توربوپک
+- npm install قبل از کپی سورس اجرا می‌شود: `prisma generate` در اسکریپت build است نه postinstall
+- سقف build در bundle basic پنج دقیقه است: type check داخل `next build` خاموش است؛ `npm run typecheck` جدا اجرا شود
+- Prisma CLI در runtime نیست؛ مایگریشن از سیستم توسعه (README)
+- `liara db create` بدون پاسخ به سؤال شبکهٔ عمومی گیر می‌کند: `printf 'n\n' | liara db create ...`؛ نسخه‌ها دقیق: postgres `17.10`، redis `7.2.3`
+- قیمت: هر منبع = قیمت پلن + قیمت bundle (جمعاً حدود ۲٫۸ میلیون تومان در ماه، ساعتی)
 
 ## نکته‌های فنی
 - نام محصول: «نتورک». اپ لیارا: `network-crm` → https://network-crm.liara.run (همین لینک در الگوی کاوه‌نگار ثبت شده)
