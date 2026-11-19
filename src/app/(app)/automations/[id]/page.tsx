@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight } from "lucide-react";
 import type { RunStatus } from "@/generated/prisma/enums";
 import { stepsSchema, triggerConfigSchema } from "@/lib/automation";
 import { formatDateTime } from "@/lib/labels";
 import { cn } from "@/lib/utils";
 import { AutoRefresh } from "@/components/app/auto-refresh";
 import { PageHeader } from "@/components/app/page-header";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { requireUser } from "@/server/auth/session";
 import { db } from "@/server/db";
@@ -47,12 +45,7 @@ export default async function AutomationPage({ params }: PageProps<"/automations
   return (
     <>
       <AutoRefresh active={automation.runs.some((r) => r.status === "RUNNING")} ms={5000} />
-      <Button variant="link" asChild className="w-fit px-0 text-muted-foreground">
-        <Link href="/automations">
-          <ArrowRight /> اتوماسیون‌ها
-        </Link>
-      </Button>
-      <PageHeader title={automation.name}>
+      <PageHeader back={{ href: "/automations", label: "اتوماسیون‌ها" }} title={automation.name}>
         <DeleteAutomation id={automation.id} name={automation.name} />
       </PageHeader>
       <AutomationBuilder

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Pencil } from "lucide-react";
+import { ArrowLeft, Pencil } from "lucide-react";
 import { formatDate, sourceLabel } from "@/lib/labels";
 import { canSeeAll } from "@/lib/permissions";
 import { ActivityForm } from "@/components/app/activity-form";
@@ -56,12 +56,7 @@ export default async function LeadPage({ params }: PageProps<"/leads/[id]">) {
 
   return (
     <>
-      <Button variant="link" asChild className="w-fit px-0 text-muted-foreground">
-        <Link href="/leads">
-          <ArrowRight /> لیدها
-        </Link>
-      </Button>
-      <PageHeader title={lead.name} description={lead.company ?? undefined}>
+      <PageHeader back={{ href: "/leads", label: "لیدها" }} title={lead.name} description={lead.company ?? undefined}>
         <SendMessageDialog
           action={sendMessageAction.bind(null, { leadId: lead.id })}
           contacts={{ phone: lead.phone, email: lead.email }}

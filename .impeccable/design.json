@@ -1,0 +1,470 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-19T01:14:27+00:00",
+  "title": "Design System: نتورک",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "oklch(0.992 0.002 95)",
+        "tonalRamp": [
+          "oklch(0.15 0.003 95)",
+          "oklch(0.27 0.003 95)",
+          "oklch(0.39 0.003 95)",
+          "oklch(0.51 0.003 95)",
+          "oklch(0.63 0.003 95)",
+          "oklch(0.75 0.003 95)",
+          "oklch(0.87 0.003 95)",
+          "oklch(0.95 0.003 95)"
+        ]
+      },
+      "card-white": {
+        "role": "neutral",
+        "displayName": "Card White",
+        "canonical": "oklch(1 0 0)",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.27 0 0)",
+          "oklch(0.39 0 0)",
+          "oklch(0.51 0 0)",
+          "oklch(0.63 0 0)",
+          "oklch(0.75 0 0)",
+          "oklch(0.87 0 0)",
+          "oklch(0.95 0 0)"
+        ]
+      },
+      "sidebar-warm": {
+        "role": "neutral",
+        "displayName": "Sidebar Warm",
+        "canonical": "oklch(0.972 0.003 95)",
+        "tonalRamp": [
+          "oklch(0.15 0.003 95)",
+          "oklch(0.27 0.003 95)",
+          "oklch(0.39 0.003 95)",
+          "oklch(0.51 0.003 95)",
+          "oklch(0.63 0.003 95)",
+          "oklch(0.75 0.003 95)",
+          "oklch(0.87 0.003 95)",
+          "oklch(0.95 0.003 95)"
+        ]
+      },
+      "muted-warm": {
+        "role": "neutral",
+        "displayName": "Muted Warm",
+        "canonical": "oklch(0.965 0.003 95)",
+        "tonalRamp": [
+          "oklch(0.15 0.003 95)",
+          "oklch(0.27 0.003 95)",
+          "oklch(0.39 0.003 95)",
+          "oklch(0.51 0.003 95)",
+          "oklch(0.63 0.003 95)",
+          "oklch(0.75 0.003 95)",
+          "oklch(0.87 0.003 95)",
+          "oklch(0.95 0.003 95)"
+        ]
+      },
+      "hover-warm": {
+        "role": "neutral",
+        "displayName": "Hover Warm",
+        "canonical": "oklch(0.955 0.004 95)",
+        "tonalRamp": [
+          "oklch(0.15 0.004 95)",
+          "oklch(0.27 0.004 95)",
+          "oklch(0.39 0.004 95)",
+          "oklch(0.51 0.004 95)",
+          "oklch(0.63 0.004 95)",
+          "oklch(0.75 0.004 95)",
+          "oklch(0.87 0.004 95)",
+          "oklch(0.95 0.004 95)"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(0.915 0.004 95)",
+        "tonalRamp": [
+          "oklch(0.15 0.004 95)",
+          "oklch(0.27 0.004 95)",
+          "oklch(0.39 0.004 95)",
+          "oklch(0.51 0.004 95)",
+          "oklch(0.63 0.004 95)",
+          "oklch(0.75 0.004 95)",
+          "oklch(0.87 0.004 95)",
+          "oklch(0.95 0.004 95)"
+        ]
+      },
+      "input-stroke": {
+        "role": "neutral",
+        "displayName": "Input Stroke",
+        "canonical": "oklch(0.89 0.005 95)",
+        "tonalRamp": [
+          "oklch(0.15 0.005 95)",
+          "oklch(0.27 0.005 95)",
+          "oklch(0.39 0.005 95)",
+          "oklch(0.51 0.005 95)",
+          "oklch(0.63 0.005 95)",
+          "oklch(0.75 0.005 95)",
+          "oklch(0.87 0.005 95)",
+          "oklch(0.95 0.005 95)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Cool Ink",
+        "canonical": "oklch(0.2 0.006 285)",
+        "tonalRamp": [
+          "oklch(0.15 0.006 285)",
+          "oklch(0.27 0.006 285)",
+          "oklch(0.39 0.006 285)",
+          "oklch(0.51 0.006 285)",
+          "oklch(0.63 0.006 285)",
+          "oklch(0.75 0.006 285)",
+          "oklch(0.87 0.006 285)",
+          "oklch(0.95 0.006 285)"
+        ]
+      },
+      "ink-secondary": {
+        "role": "neutral",
+        "displayName": "Secondary Ink",
+        "canonical": "oklch(0.5 0.008 285)",
+        "tonalRamp": [
+          "oklch(0.15 0.008 285)",
+          "oklch(0.27 0.008 285)",
+          "oklch(0.39 0.008 285)",
+          "oklch(0.51 0.008 285)",
+          "oklch(0.63 0.008 285)",
+          "oklch(0.75 0.008 285)",
+          "oklch(0.87 0.008 285)",
+          "oklch(0.95 0.008 285)"
+        ]
+      },
+      "firouzeh": {
+        "role": "primary",
+        "displayName": "Firouzeh",
+        "canonical": "oklch(0.5 0.095 196)",
+        "tonalRamp": [
+          "oklch(0.15 0.095 196)",
+          "oklch(0.27 0.095 196)",
+          "oklch(0.39 0.095 196)",
+          "oklch(0.51 0.095 196)",
+          "oklch(0.63 0.095 196)",
+          "oklch(0.75 0.095 196)",
+          "oklch(0.87 0.095 196)",
+          "oklch(0.95 0.095 196)"
+        ]
+      },
+      "on-firouzeh": {
+        "role": "primary",
+        "displayName": "On Firouzeh",
+        "canonical": "oklch(0.99 0.004 196)",
+        "tonalRamp": [
+          "oklch(0.15 0.004 196)",
+          "oklch(0.27 0.004 196)",
+          "oklch(0.39 0.004 196)",
+          "oklch(0.51 0.004 196)",
+          "oklch(0.63 0.004 196)",
+          "oklch(0.75 0.004 196)",
+          "oklch(0.87 0.004 196)",
+          "oklch(0.95 0.004 196)"
+        ]
+      },
+      "firouzeh-ring": {
+        "role": "primary",
+        "displayName": "Firouzeh Ring",
+        "canonical": "oklch(0.62 0.09 196)",
+        "tonalRamp": [
+          "oklch(0.15 0.09 196)",
+          "oklch(0.27 0.09 196)",
+          "oklch(0.39 0.09 196)",
+          "oklch(0.51 0.09 196)",
+          "oklch(0.63 0.09 196)",
+          "oklch(0.75 0.09 196)",
+          "oklch(0.87 0.09 196)",
+          "oklch(0.95 0.09 196)"
+        ]
+      },
+      "firouzeh-soft": {
+        "role": "primary",
+        "displayName": "Firouzeh Soft",
+        "canonical": "oklch(0.95 0.03 196)",
+        "tonalRamp": [
+          "oklch(0.15 0.03 196)",
+          "oklch(0.27 0.03 196)",
+          "oklch(0.39 0.03 196)",
+          "oklch(0.51 0.03 196)",
+          "oklch(0.63 0.03 196)",
+          "oklch(0.75 0.03 196)",
+          "oklch(0.87 0.03 196)",
+          "oklch(0.95 0.03 196)"
+        ]
+      },
+      "firouzeh-ink": {
+        "role": "primary",
+        "displayName": "Firouzeh Ink",
+        "canonical": "oklch(0.38 0.08 196)",
+        "tonalRamp": [
+          "oklch(0.15 0.08 196)",
+          "oklch(0.27 0.08 196)",
+          "oklch(0.39 0.08 196)",
+          "oklch(0.51 0.08 196)",
+          "oklch(0.63 0.08 196)",
+          "oklch(0.75 0.08 196)",
+          "oklch(0.87 0.08 196)",
+          "oklch(0.95 0.08 196)"
+        ]
+      },
+      "firouzeh-selection": {
+        "role": "primary",
+        "displayName": "Firouzeh Selection",
+        "canonical": "oklch(0.86 0.06 196)",
+        "tonalRamp": [
+          "oklch(0.15 0.06 196)",
+          "oklch(0.27 0.06 196)",
+          "oklch(0.39 0.06 196)",
+          "oklch(0.51 0.06 196)",
+          "oklch(0.63 0.06 196)",
+          "oklch(0.75 0.06 196)",
+          "oklch(0.87 0.06 196)",
+          "oklch(0.95 0.06 196)"
+        ]
+      },
+      "destructive": {
+        "role": "error",
+        "displayName": "Pomegranate",
+        "canonical": "oklch(0.56 0.19 25)",
+        "tonalRamp": [
+          "oklch(0.15 0.19 25)",
+          "oklch(0.27 0.19 25)",
+          "oklch(0.39 0.19 25)",
+          "oklch(0.51 0.19 25)",
+          "oklch(0.63 0.19 25)",
+          "oklch(0.75 0.19 25)",
+          "oklch(0.87 0.19 25)",
+          "oklch(0.95 0.19 25)"
+        ]
+      },
+      "login-night": {
+        "role": "neutral",
+        "displayName": "Login Night",
+        "canonical": "oklch(0.21 0.02 220)",
+        "tonalRamp": [
+          "oklch(0.15 0.02 220)",
+          "oklch(0.27 0.02 220)",
+          "oklch(0.39 0.02 220)",
+          "oklch(0.51 0.02 220)",
+          "oklch(0.63 0.02 220)",
+          "oklch(0.75 0.02 220)",
+          "oklch(0.87 0.02 220)",
+          "oklch(0.95 0.02 220)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Login heading only."
+      },
+      "kpi-value": {
+        "displayName": "KPI Value",
+        "purpose": "KPI strip numbers; 21px below sm."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Page title in the sticky toolbar."
+      },
+      "card-title": {
+        "displayName": "Card Title",
+        "purpose": "Card and panel headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Table cells, nav items."
+      },
+      "body-secondary": {
+        "displayName": "Body Secondary",
+        "purpose": "Toolbar meta, breadcrumbs, segmented items, kanban cards."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Table headers, KPI labels."
+      },
+      "chip": {
+        "displayName": "Chip",
+        "purpose": "Status and score chips."
+      },
+      "nav-group": {
+        "displayName": "Nav Group",
+        "purpose": "Sidebar group labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "overlay",
+        "value": "0 1px 2px oklch(0.2 0.01 285 / 0.06), 0 8px 24px -6px oklch(0.2 0.01 285 / 0.16)",
+        "purpose": "Floating content only (drag preview, popovers, menus). Nothing at rest."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state",
+        "value": "150ms (Tailwind default ease)",
+        "purpose": "Color transitions on rows, segments, kanban cards and columns."
+      },
+      {
+        "name": "press",
+        "value": "translateY(1px)",
+        "purpose": "Button active state."
+      },
+      {
+        "name": "drag-tilt",
+        "value": "rotate(1.5deg)",
+        "purpose": "Kanban drag overlay."
+      },
+      {
+        "name": "charts",
+        "value": "none",
+        "purpose": "No load animation on charts."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one firouzeh action per view.",
+      "html": "<button class=\"ds-btn-primary\">معامله جدید</button>",
+      "css": ".ds-btn-primary { font-family: var(--font-sans, 'Vazirmatn Variable', system-ui, sans-serif); height: 32px; padding: 0 10px; border: 1px solid transparent; border-radius: 8px; background: var(--primary, oklch(0.5 0.095 196)); color: var(--primary-foreground, oklch(0.99 0.004 196)); font-size: 14px; font-weight: 500; cursor: pointer; transition: background 150ms; } .ds-btn-primary:hover { background: color-mix(in oklch, var(--primary, oklch(0.5 0.095 196)) 80%, transparent); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--ring, oklch(0.62 0.09 196)); outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Every non-primary action.",
+      "html": "<button class=\"ds-btn-outline\">فیلتر</button>",
+      "css": ".ds-btn-outline { font-family: var(--font-sans, 'Vazirmatn Variable', system-ui, sans-serif); height: 32px; padding: 0 10px; border: 1px solid var(--border, oklch(0.915 0.004 95)); border-radius: 8px; background: var(--background, oklch(0.992 0.002 95)); color: var(--foreground, oklch(0.2 0.006 285)); font-size: 14px; font-weight: 500; cursor: pointer; } .ds-btn-outline:hover { background: var(--muted, oklch(0.965 0.003 95)); } .ds-btn-outline:focus-visible { outline: 2px solid var(--ring, oklch(0.62 0.09 196)); outline-offset: 2px; }"
+    },
+    {
+      "name": "Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "32px field, firouzeh focus ring.",
+      "html": "<input class=\"ds-input\" dir=\"rtl\" placeholder=\"نام مشتری\" />",
+      "css": ".ds-input { font-family: var(--font-sans, 'Vazirmatn Variable', system-ui, sans-serif); height: 32px; width: 240px; padding: 4px 10px; border: 1px solid var(--input, oklch(0.89 0.005 95)); border-radius: 8px; background: transparent; color: var(--foreground, oklch(0.2 0.006 285)); font-size: 14px; outline: none; } .ds-input::placeholder { color: var(--muted-foreground, oklch(0.5 0.008 285)); } .ds-input:focus-visible { border-color: var(--ring, oklch(0.62 0.09 196)); box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring, oklch(0.62 0.09 196)) 50%, transparent); }"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Tinted field plus same-hue label; never color alone.",
+      "html": "<span class=\"ds-chip ds-chip-qualified\">واجد شرایط</span> <span class=\"ds-chip ds-chip-new\">جدید</span>",
+      "css": ".ds-chip { font-family: var(--font-sans, 'Vazirmatn Variable', system-ui, sans-serif); display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 6.4px; font-size: 12px; font-weight: 500; white-space: nowrap; box-shadow: inset 0 0 0 1px color-mix(in oklch, currentColor 12%, transparent); } .ds-chip-qualified { background: oklch(0.95 0.052 163); color: oklch(0.432 0.095 166.9); } .ds-chip-new { background: oklch(0.951 0.026 236.8); color: oklch(0.443 0.11 240.8); }"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "custom",
+      "refersTo": "segmented",
+      "description": "URL-backed view switch.",
+      "html": "<div class=\"ds-seg\" role=\"tablist\" dir=\"rtl\"><a class=\"ds-seg-item ds-seg-on\" role=\"tab\">لیست</a><a class=\"ds-seg-item\" role=\"tab\">تقویم</a></div>",
+      "css": ".ds-seg { font-family: var(--font-sans, 'Vazirmatn Variable', system-ui, sans-serif); display: inline-flex; align-items: center; height: 32px; padding: 2px; border: 1px solid var(--border, oklch(0.915 0.004 95)); border-radius: 8px; background: color-mix(in oklch, var(--muted, oklch(0.965 0.003 95)) 60%, transparent); box-sizing: border-box; } .ds-seg-item { display: flex; align-items: center; height: 100%; padding: 0 12px; border-radius: 6.4px; font-size: 13px; color: var(--muted-foreground, oklch(0.5 0.008 285)); cursor: pointer; transition: color 150ms; } .ds-seg-item:hover { color: var(--foreground, oklch(0.2 0.006 285)); } .ds-seg-on { background: var(--background, oklch(0.992 0.002 95)); color: var(--foreground, oklch(0.2 0.006 285)); font-weight: 500; box-shadow: 0 0 0 1px var(--border, oklch(0.915 0.004 95)); }"
+    },
+    {
+      "name": "Page Toolbar",
+      "kind": "nav",
+      "refersTo": "page-toolbar",
+      "description": "Sticky one-row toolbar; data starts below it.",
+      "html": "<div class=\"ds-bar\" dir=\"rtl\"><div class=\"ds-bar-l\"><h1>مشتری‌ها</h1><span>۳۰</span><p>همهٔ مشتری‌های شما</p></div><button class=\"ds-bar-btn\">مشتری جدید</button></div>",
+      "css": ".ds-bar { font-family: var(--font-sans, 'Vazirmatn Variable', system-ui, sans-serif); display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0 32px; border-bottom: 1px solid var(--border, oklch(0.915 0.004 95)); background: color-mix(in oklch, var(--background, oklch(0.992 0.002 95)) 92%, transparent); backdrop-filter: blur(12px); } .ds-bar-l { display: flex; align-items: baseline; gap: 8px; } .ds-bar h1 { margin: 0; font-size: 16px; line-height: 28px; font-weight: 600; letter-spacing: -0.025em; } .ds-bar span, .ds-bar p { margin: 0; font-size: 13px; color: var(--muted-foreground, oklch(0.5 0.008 285)); font-variant-numeric: tabular-nums; } .ds-bar-btn { height: 32px; padding: 0 10px; border: 0; border-radius: 8px; background: var(--primary, oklch(0.5 0.095 196)); color: var(--primary-foreground, oklch(0.99 0.004 196)); font: inherit; font-size: 14px; font-weight: 500; }"
+    },
+    {
+      "name": "KPI Strip",
+      "kind": "card",
+      "refersTo": "kpi-strip",
+      "description": "KPI cells in one bordered strip with hairline dividers.",
+      "html": "<section class=\"ds-kpi\" dir=\"rtl\"><div><p class=\"ds-kpi-l\">فروش ماه</p><p class=\"ds-kpi-v\">۳۲۰ <small>میلیون تومان</small></p><p class=\"ds-kpi-d\"><b>۱۲٪</b> نسبت به ماه قبل</p></div><div><p class=\"ds-kpi-l\">لید جدید</p><p class=\"ds-kpi-v\">۴۸</p><p class=\"ds-kpi-d\"><b>۵٪</b> نسبت به ماه قبل</p></div></section>",
+      "css": ".ds-kpi { font-family: var(--font-sans, 'Vazirmatn Variable', system-ui, sans-serif); display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--border, oklch(0.915 0.004 95)); border-radius: 10px; background: var(--card, oklch(1 0 0)); overflow: hidden; } .ds-kpi > div { padding: 16px 20px; } .ds-kpi > div + div { border-inline-start: 1px solid var(--border, oklch(0.915 0.004 95)); } .ds-kpi p { margin: 0; } .ds-kpi-l { font-size: 12.5px; color: var(--muted-foreground, oklch(0.5 0.008 285)); } .ds-kpi-v { font-size: 26px; line-height: 32px; font-weight: 600; letter-spacing: -0.025em; font-variant-numeric: tabular-nums; } .ds-kpi-v small { font-size: 13px; font-weight: 400; color: var(--muted-foreground, oklch(0.5 0.008 285)); } .ds-kpi-d { font-size: 12px; color: var(--muted-foreground, oklch(0.5 0.008 285)); } .ds-kpi-d b { padding: 2px 6px; border-radius: 6.4px; background: oklch(0.979 0.021 166); color: oklch(0.508 0.118 165.6); font-weight: 500; }"
+    },
+    {
+      "name": "Kanban Column",
+      "kind": "custom",
+      "refersTo": "kanban-column",
+      "description": "Muted bed, stage dot, count, Toman total, hairline cards.",
+      "html": "<section class=\"ds-col\" dir=\"rtl\"><header><i></i><h2>مذاکره</h2><span>۳</span></header><p class=\"ds-col-t\">۱۲۰٬۰۰۰٬۰۰۰ تومان</p><article class=\"ds-card\"><h3>تمدید قرارداد</h3><p>شرکت آرین</p><b>۴۵٬۰۰۰٬۰۰۰ تومان</b></article></section>",
+      "css": ".ds-col { font-family: var(--font-sans, 'Vazirmatn Variable', system-ui, sans-serif); width: 220px; padding-bottom: 8px; border-radius: 10px; background: color-mix(in oklch, var(--muted, oklch(0.965 0.003 95)) 55%, transparent); } .ds-col header { display: flex; align-items: center; gap: 8px; padding: 12px 12px 0; } .ds-col i { width: 8px; height: 8px; border-radius: 50%; background: oklch(0.705 0.187 47.6); } .ds-col h2 { margin: 0; font-size: 13px; font-weight: 600; } .ds-col span { padding: 0 6px; border-radius: 6.4px; background: var(--background, oklch(0.992 0.002 95)); font-size: 11.5px; color: var(--muted-foreground, oklch(0.5 0.008 285)); } .ds-col-t { margin: 0; padding: 4px 12px 12px; font-size: 12px; color: var(--muted-foreground, oklch(0.5 0.008 285)); } .ds-card { margin: 0 8px; padding: 12px; border: 1px solid var(--border, oklch(0.915 0.004 95)); border-radius: 8px; background: var(--card, oklch(1 0 0)); font-size: 13px; cursor: grab; transition: border-color 150ms; } .ds-card:hover { border-color: color-mix(in oklch, var(--foreground, oklch(0.2 0.006 285)) 20%, transparent); } .ds-card h3 { margin: 0; font-size: 13px; font-weight: 600; } .ds-card p { margin: 2px 0 10px; font-size: 12px; color: var(--muted-foreground, oklch(0.5 0.008 285)); } .ds-card b { font-size: 13.5px; font-weight: 600; font-variant-numeric: tabular-nums; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Persian Ledger Desk",
+    "overview": "A light working plane for people who sit in front of it all day: warm, near-white paper, hairlines instead of boxes, and records that read like a precise ledger. The benchmark is Attio's craft (calm, dense, keyboard-driven), set natively in Persian RTL with Persian digits throughout. It is built on shadcn/radix controls retuned to this palette and scale, not the stock gray admin template.\n\nDensity stays high where people work (tables, kanban, KPI strip) and quiet where they read. A page has no hero. A sticky one-row toolbar comes first and the data starts right under it. One accent, Persian turquoise (firouzeh), marks what you can act on or what is selected or focused. Everything else is ink on warm neutrals.\n\nDepth comes from tone and 1px hairlines. Nothing casts a shadow at rest, so an overlay's shadow means \"this floats above your work\".",
+    "keyCharacteristics": [
+      "Warm-neutral paper and hairlines; a single firouzeh accent.",
+      "Compact type: Vazirmatn at 13 to 16px for UI, with Persian tabular digits.",
+      "8px controls, 10px panels, no resting shadows.",
+      "Keyboard first: the ⌘K palette reaches every page and record.",
+      "RTL native: the sidebar sits on the right, time reads right to left, and LTR islands for phones, emails and codes."
+    ],
+    "rules": [
+      {
+        "name": "The One Voice Rule",
+        "body": "Firouzeh is for the primary action, selection and focus. It is never decoration, a section color, or a second chart series.",
+        "section": "colors"
+      },
+      {
+        "name": "The Never Color Alone Rule",
+        "body": "Every colored state carries a label or number: chips print their label, the score chip prints its number and band, priority shows dot plus word, and bars print their value.",
+        "section": "colors"
+      },
+      {
+        "name": "The Persian Digits Rule",
+        "body": "Every number a person reads goes through `toLocaleString(\"fa-IR\")` (or `Intl.NumberFormat(\"fa-IR\")`) and sits in `tabular-nums`: counts, amounts (Toman), percentages, dates, badges. Phone numbers stay Latin digits inside a `dir=\"ltr\"` island.",
+        "section": "typography"
+      },
+      {
+        "name": "The Compact Scale Rule",
+        "body": "UI text lives between 12 and 16px. Nothing in the authenticated app goes above 16px except KPI values.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hairline Depth Rule",
+        "body": "Only overlays get a shadow, and they use `shadow-overlay`. If a resting surface needs separation, give it a border or a tonal step, never a shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Series Rule",
+        "body": "Charts show a single series in firouzeh with no legend, because the card title names the series. Load animation is off (`isAnimationActive={false}`).",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** start every app page with the sticky one-row toolbar and put data directly under it.",
+      "**Do** format every displayed number with `fa-IR` and `tabular-nums`. Keep phones, emails, OTP codes and shortcut keys in `dir=\"ltr\"` islands.",
+      "**Do** use logical properties (`ps`/`pe`, `ms`/`me`, `start`/`end`, `text-start`) everywhere in the RTL page. **Inside an LTR input**, position icons and padding with physical properties (`right-3`, `pr-9`), because logical `start` inside `dir=\"ltr\"` resolves to the left.",
+      "**Do** carry status as a tinted chip with its label, or a dot with its word. Never use color alone.",
+      "**Do** use `shadow-overlay` for anything that floats (drag previews, popovers, menus).",
+      "**Do** route new navigable pages through `nav.ts` so the sidebar and the ⌘K palette stay in sync."
+    ],
+    "donts": [
+      "**Don't** use firouzeh for decoration, section fills, illustrations in the app, or a second data series.",
+      "**Don't** put shadows on resting surfaces. Cards, tables, columns and dialogs separate by hairline and tone.",
+      "**Don't** build hero blocks, oversized headings (over 16px in the app), or rows of separate KPI cards.",
+      "**Don't** add chart legends, multi-series color sets or entry animations.",
+      "**Don't** put Persian words inside the LTR chart SVG. Format ticks as numbers and name the unit in the card title.",
+      "**Don't** use Latin digits for counts, amounts, dates or percentages."
+    ]
+  }
+}

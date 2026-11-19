@@ -31,13 +31,13 @@ import { DealFormDialog, type DealFormValue } from "./deal-form-dialog";
 export type BoardDeal = DealFormValue & { customerName: string; ownerName: string | null };
 type Columns = Record<DealStage, BoardDeal[]>;
 
-const stageAccent: Record<DealStage, string> = {
-  NEW: "border-t-sky-500",
-  CONTACTED: "border-t-violet-500",
-  PROPOSAL: "border-t-amber-500",
-  NEGOTIATION: "border-t-orange-500",
-  WON: "border-t-emerald-500",
-  LOST: "border-t-zinc-400",
+const stageDot: Record<DealStage, string> = {
+  NEW: "bg-sky-500",
+  CONTACTED: "bg-violet-500",
+  PROPOSAL: "bg-amber-500",
+  NEGOTIATION: "bg-orange-500",
+  WON: "bg-emerald-500",
+  LOST: "bg-zinc-400",
 };
 
 const group = (deals: BoardDeal[]) =>
@@ -46,7 +46,8 @@ const group = (deals: BoardDeal[]) =>
 const stageOf = (columns: Columns, id: string): DealStage | undefined =>
   dealStages.includes(id as DealStage) ? (id as DealStage) : dealStages.find((s) => columns[s].some((d) => d.id === id));
 
-export function Board({ deals, owners }: { deals: BoardDeal[]; owners?: OwnerOption[] }) {
+/** `openId` (from ⌘K) opens that deal's editor on arrival. */
+export function Board({ deals, owners, openId }: { deals: BoardDeal[]; owners?: OwnerOption[]; openId?: string }) {
   const router = useRouter();
   const [columns, setColumns] = useState(() => group(deals));
   // Re-sync with fresh server data after a save (React's "adjust state when a prop changes" pattern).
@@ -57,13 +58,23 @@ export function Board({ deals, owners }: { deals: BoardDeal[]; owners?: OwnerOpt
   }
   const [activeId, setActiveId] = useState<string | null>(null);
   const [fromStage, setFromStage] = useState<DealStage | null>(null);
-  const [editing, setEditing] = useState<BoardDeal | null>(null);
+  const [editing, setEditing] = useState<BoardDeal | null>(() => deals.find((d) => d.id === openId) ?? null);
+  // ⌘K can target a deal while the board is already open: follow `openId` changes too.
+  const [prevOpenId, setPrevOpenId] = useState(openId);
+  if (openId !== prevOpenId) {
+    setPrevOpenId(openId);
+    setEditing(deals.find((d) => d.id === openId) ?? null);
+  }
   const [, startTransition] = useTransition();
 
   const sensors = useSensors(
     // A 6px threshold lets a plain click open the card instead of starting a drag.
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+    // Space picks up and drops; Enter is left free to open the card.
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+      keyboardCodes: { start: ["Space"], end: ["Space"], cancel: ["Escape"] },
+    }),
   );
 
   const active = activeId ? Object.values(columns).flat().find((d) => d.id === activeId) : undefined;
@@ -117,6 +128,7 @@ export function Board({ deals, owners }: { deals: BoardDeal[]; owners?: OwnerOpt
   return (
     <>
       <DndContext
+        id="deals-board" // stable ids so server and client render the same aria-describedby
         sensors={sensors}
         collisionDetection={closestCorners}
         onDragStart={onDragStart}
@@ -129,7 +141,7 @@ export function Board({ deals, owners }: { deals: BoardDeal[]; owners?: OwnerOpt
       >
         {/* Horizontal scroll on small screens; six columns side by side on wide ones. */}
         <div className="-mx-4 overflow-x-auto px-4 pb-2 md:-mx-8 md:px-8">
-          <div className="grid min-w-[72rem] grid-cols-6 gap-3">
+          <div className="grid min-w-[68rem] grid-cols-6 gap-3">
             {dealStages.map((stage) => (
               <Column key={stage} stage={stage} deals={columns[stage]} onOpen={setEditing} />
             ))}
@@ -144,7 +156,12 @@ export function Board({ deals, owners }: { deals: BoardDeal[]; owners?: OwnerOpt
           deal={editing}
           owners={owners}
           open
-          onOpenChange={(o) => !o && setEditing(null)}
+          onOpenChange={(o) => {
+            if (o) return;
+            setEditing(null);
+            // Drop ?open= so a reload does not reopen the editor.
+            if (openId) router.replace("/deals", { scroll: false });
+          }}
         />
       )}
     </>
@@ -158,13 +175,14 @@ function Column({ stage, deals, onOpen }: { stage: DealStage; deals: BoardDeal[]
     <section
       ref={setNodeRef}
       aria-label={dealStageLabel[stage]}
-      className={cn("flex min-h-96 flex-col rounded-xl border border-t-4 bg-muted/40 transition-colors", stageAccent[stage], isOver && "bg-muted")}
+      className={cn("flex min-h-[28rem] flex-col rounded-[10px] bg-muted/55 transition-colors duration-150", isOver && "bg-brand-soft")}
     >
-      <header className="flex items-baseline justify-between gap-2 px-3 pt-3 pb-2">
-        <h2 className="text-sm font-semibold">{dealStageLabel[stage]}</h2>
-        <span className="text-xs text-muted-foreground">{deals.length.toLocaleString("fa-IR")}</span>
+      <header className="flex items-center gap-2 px-3 pt-3">
+        <span className={cn("size-2 rounded-full", stageDot[stage])} aria-hidden />
+        <h2 className="text-[13px] font-semibold">{dealStageLabel[stage]}</h2>
+        <span className="rounded-md bg-background px-1.5 text-[11.5px] text-muted-foreground tabular-nums">{deals.length.toLocaleString("fa-IR")}</span>
       </header>
-      <p className="px-3 pb-3 text-xs text-muted-foreground">{formatToman(total)}</p>
+      <p className="px-3 pt-1 pb-3 text-[12px] text-muted-foreground tabular-nums">{formatToman(total)}</p>
       <SortableContext items={deals.map((d) => d.id)} strategy={verticalListSortingStrategy}>
         <div className="flex flex-1 flex-col gap-2 px-2 pb-2">
           {deals.map((d) => (
@@ -189,7 +207,7 @@ function SortableCard({ deal, onOpen }: { deal: BoardDeal; onOpen: (d: BoardDeal
       onClick={() => onOpen(deal)}
       onKeyDown={(e) => {
         listeners?.onKeyDown?.(e);
-        if (e.key === "Enter") onOpen(deal);
+        if (e.key === "Enter" && !isDragging) onOpen(deal);
       }}
       aria-roledescription="کارت معامله"
     >
@@ -202,13 +220,13 @@ function DealCard({ deal, overlay }: { deal: BoardDeal; overlay?: boolean }) {
   return (
     <article
       className={cn(
-        "cursor-grab rounded-lg border bg-card p-3 text-sm shadow-xs transition-shadow hover:shadow-md active:cursor-grabbing",
-        overlay && "rotate-2 shadow-lg",
+        "cursor-grab rounded-lg border bg-card p-3 text-[13px] transition-colors duration-150 hover:border-foreground/20 active:cursor-grabbing",
+        overlay && "rotate-[1.5deg] shadow-overlay",
       )}
     >
-      <h3 className="font-medium leading-snug">{deal.title}</h3>
+      <h3 className="leading-snug font-semibold">{deal.title}</h3>
       <p className="mt-0.5 text-xs text-muted-foreground">{deal.customerName}</p>
-      <p className="mt-2 font-semibold tabular-nums">{formatToman(deal.amount)}</p>
+      <p className="mt-2.5 text-[13.5px] font-semibold tabular-nums">{formatToman(deal.amount)}</p>
       <div className="mt-2 flex items-center justify-between gap-2 text-xs text-muted-foreground">
         {deal.expectedCloseAt ? (
           <span className="flex items-center gap-1">
@@ -220,7 +238,7 @@ function DealCard({ deal, overlay }: { deal: BoardDeal; overlay?: boolean }) {
         )}
         {deal.ownerName && (
           <Avatar className="size-6" title={deal.ownerName}>
-            <AvatarFallback className="text-[10px]">{deal.ownerName.slice(0, 1)}</AvatarFallback>
+            <AvatarFallback className="bg-brand-soft text-[10px] font-semibold text-brand-ink">{deal.ownerName.slice(0, 1)}</AvatarFallback>
           </Avatar>
         )}
       </div>

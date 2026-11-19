@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Pencil, Plus } from "lucide-react";
+import { Pencil, Plus } from "lucide-react";
 import { dealStageLabel, formatDate, formatToman, sourceLabel } from "@/lib/labels";
 import { canSeeAll } from "@/lib/permissions";
 import { ActivityForm } from "@/components/app/activity-form";
@@ -54,12 +53,7 @@ export default async function CustomerPage({ params }: PageProps<"/customers/[id
 
   return (
     <>
-      <Button variant="link" asChild className="w-fit px-0 text-muted-foreground">
-        <Link href="/customers">
-          <ArrowRight /> مشتری‌ها
-        </Link>
-      </Button>
-      <PageHeader title={customer.name} description={customer.company ?? undefined}>
+      <PageHeader back={{ href: "/customers", label: "مشتری‌ها" }} title={customer.name} description={customer.company ?? undefined}>
         <SendMessageDialog
           action={sendMessageAction.bind(null, { customerId: customer.id })}
           contacts={{ phone: customer.phone, email: customer.email }}

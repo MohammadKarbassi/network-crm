@@ -57,7 +57,7 @@ export default async function CustomersPage({ searchParams }: PageProps<"/custom
 
   return (
     <>
-      <PageHeader title="مشتری‌ها" description={`${total.toLocaleString("fa-IR")} مشتری${manager ? "" : " تخصیص‌یافته به شما"}`}>
+      <PageHeader count={total} title="مشتری‌ها" description={`${total.toLocaleString("fa-IR")} مشتری${manager ? "" : " تخصیص‌یافته به شما"}`}>
         <CustomerFormDialog
           owners={owners}
           trigger={
@@ -69,8 +69,8 @@ export default async function CustomersPage({ searchParams }: PageProps<"/custom
       </PageHeader>
 
       {/* Plain GET form: filters live in the URL, so they survive refresh and can be shared. */}
-      <form className="grid gap-2 sm:grid-cols-[1fr_12rem_12rem_auto]">
-        <div className="relative">
+      <form className="grid grid-cols-2 gap-2 sm:grid-cols-[1fr_12rem_12rem_auto]">
+        <div className="relative col-span-2 sm:col-span-1">
           <Search className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input name="q" defaultValue={q} placeholder="جستجوی نام، تلفن، ایمیل یا شرکت" className="ps-9" aria-label="جستجو" />
         </div>

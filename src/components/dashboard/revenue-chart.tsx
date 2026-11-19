@@ -4,11 +4,11 @@ import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { formatToman } from "@/lib/labels";
 
-// Single series: one hue (palette slot 1), no legend; the card title names it.
+// Single series in the brand accent, no legend; the card title names it.
 // Axis ticks are plain numbers in millions: Persian words inside the LTR SVG would flip ("میلیون ۳۲۰").
 const millions = (n: number) => (n / 1_000_000).toLocaleString("fa-IR", { maximumFractionDigits: 0 });
 
-const config = { revenue: { label: "فروش", color: "#2a78d6" } } satisfies ChartConfig;
+const config = { revenue: { label: "فروش", color: "var(--primary)" } } satisfies ChartConfig;
 
 export function RevenueChart({ data }: { data: { month: string; revenue: number; count: number }[] }) {
   return (
@@ -32,7 +32,7 @@ export function RevenueChart({ data }: { data: { month: string; revenue: number;
             />
           }
         />
-        <Bar dataKey="revenue" fill="var(--color-revenue)" radius={[4, 4, 0, 0]} maxBarSize={24} />
+        <Bar dataKey="revenue" fill="var(--color-revenue)" radius={[4, 4, 0, 0]} maxBarSize={24} isAnimationActive={false} />
       </BarChart>
     </ChartContainer>
   );

@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2, Smartphone } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
@@ -48,21 +48,26 @@ export function LoginForm() {
       <form className="flex flex-col gap-4" onSubmit={(e) => (e.preventDefault(), requestCode())}>
         <Field>
           <FieldLabel htmlFor="phone">شماره موبایل</FieldLabel>
-          <Input
-            id="phone"
-            inputMode="tel"
-            autoComplete="tel"
-            dir="ltr"
-            placeholder="09xxxxxxxxx"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            autoFocus
-            required
-          />
+          <div className="relative">
+            <Smartphone className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              id="phone"
+              inputMode="tel"
+              autoComplete="tel"
+              dir="ltr"
+              placeholder="09xxxxxxxxx"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="h-11 pr-9 text-end text-base tracking-wider"
+              autoFocus
+              required
+            />
+          </div>
         </Field>
-        <Button type="submit" disabled={pending || !phone}>
-          {pending && <Loader2 className="animate-spin" />}
+        <Button type="submit" size="lg" className="h-11" disabled={pending || !phone}>
+          {pending ? <Loader2 className="animate-spin" /> : null}
           دریافت کد ورود
+          {!pending && <ArrowLeft />}
         </Button>
       </form>
     );
@@ -88,13 +93,13 @@ export function LoginForm() {
           >
             <InputOTPGroup>
               {[0, 1, 2, 3, 4].map((i) => (
-                <InputOTPSlot key={i} index={i} />
+                <InputOTPSlot key={i} index={i} className="size-12 text-lg" />
               ))}
             </InputOTPGroup>
           </InputOTP>
         </div>
       </Field>
-      <Button onClick={() => verify(code)} disabled={pending || code.length !== 5}>
+      <Button size="lg" className="h-11" onClick={() => verify(code)} disabled={pending || code.length !== 5}>
         {pending && <Loader2 className="animate-spin" />}
         ورود
       </Button>

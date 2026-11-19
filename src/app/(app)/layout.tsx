@@ -1,19 +1,24 @@
+import { addDays, startOfDay } from "date-fns-jalali";
 import { AppSidebar } from "@/components/app/app-sidebar";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { CommandPalette } from "@/components/app/command-palette";
+import { MobileBar } from "@/components/app/mobile-bar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { requireUser } from "@/server/auth/session";
+import { db } from "@/server/db";
 
 export default async function AppLayout({ children }: LayoutProps<"/">) {
   const user = await requireUser();
+  // Badge on «تسک‌ها»: the user's own tasks due today or overdue.
+  const dueTasks = await db.task.count({ where: { assigneeId: user.id, doneAt: null, dueAt: { lt: addDays(startOfDay(new Date()), 1) } } });
   return (
-    <SidebarProvider>
-      <AppSidebar user={user} />
-      <SidebarInset>
-        <header className="flex h-14 items-center gap-2 border-b px-4 md:hidden">
-          <SidebarTrigger />
-          <span className="font-semibold">نتورک</span>
-        </header>
-        <div className="flex flex-1 flex-col gap-6 p-4 md:p-8">{children}</div>
-      </SidebarInset>
-    </SidebarProvider>
+    <CommandPalette role={user.role}>
+      <SidebarProvider>
+        <AppSidebar user={user} dueTasks={dueTasks} />
+        <SidebarInset className="min-w-0">
+          <MobileBar />
+          <div className="flex flex-1 flex-col gap-5 px-4 pt-4 pb-10 md:px-8 md:pt-6">{children}</div>
+        </SidebarInset>
+      </SidebarProvider>
+    </CommandPalette>
   );
 }

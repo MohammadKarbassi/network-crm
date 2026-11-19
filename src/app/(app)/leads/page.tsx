@@ -78,7 +78,7 @@ export default async function LeadsPage({ searchParams }: PageProps<"/leads">) {
 
   return (
     <>
-      <PageHeader title="لیدها" description="مشتریان بالقوه‌ای که هنوز خرید نکرده‌اند. لید واجد شرایط را به مشتری تبدیل کنید.">
+      <PageHeader count={total} title="لیدها" description="مشتریان بالقوه‌ای که هنوز خرید نکرده‌اند. لید واجد شرایط را به مشتری تبدیل کنید.">
         <LeadFormDialog
           owners={owners}
           trigger={
@@ -89,8 +89,8 @@ export default async function LeadsPage({ searchParams }: PageProps<"/leads">) {
         />
       </PageHeader>
 
-      <form className="grid gap-2 sm:grid-cols-2 lg:grid-cols-[1fr_10rem_9rem_10rem_11rem_auto]">
-        <div className="relative sm:col-span-2 lg:col-span-1">
+      <form className="grid grid-cols-2 gap-2 lg:grid-cols-[1fr_10rem_9rem_10rem_11rem_auto]">
+        <div className="relative col-span-2 lg:col-span-1">
           <Search className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input name="q" defaultValue={q} placeholder="جستجوی نام، تلفن، ایمیل یا شرکت" className="ps-9" aria-label="جستجو" />
         </div>

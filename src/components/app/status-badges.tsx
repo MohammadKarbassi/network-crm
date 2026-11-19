@@ -17,7 +17,7 @@ const priorityStyle: Record<Priority, string> = {
   HIGH: "text-red-700 dark:text-red-400",
 };
 
-const pill = "inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium whitespace-nowrap";
+const pill = "inline-flex h-6 items-center rounded-md px-2 text-[12px] font-medium whitespace-nowrap ring-1 ring-inset ring-current/12";
 
 export const LeadStatusBadge = ({ status }: { status: LeadStatus }) => (
   <span className={cn(pill, leadStatusStyle[status])}>{leadStatusLabel[status]}</span>

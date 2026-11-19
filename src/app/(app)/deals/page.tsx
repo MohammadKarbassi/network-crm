@@ -47,7 +47,7 @@ export default async function DealsPage({ searchParams }: PageProps<"/deals">) {
 
   return (
     <>
-      <PageHeader
+      <PageHeader count={open.length}
         title="پایپ‌لاین فروش"
         description={`${open.length.toLocaleString("fa-IR")} معامله باز به ارزش ${formatToman(open.reduce((s, d) => s + d.amount, 0))}. کارت‌ها را بین مراحل جابه‌جا کنید.`}
       >
@@ -82,7 +82,7 @@ export default async function DealsPage({ searchParams }: PageProps<"/deals">) {
           </Button>
         )}
       </PageHeader>
-      <Board deals={board} owners={owners} />
+      <Board deals={board} owners={owners} openId={typeof sp.open === "string" ? sp.open : undefined} />
     </>
   );
 }

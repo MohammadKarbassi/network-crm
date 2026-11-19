@@ -6,7 +6,8 @@ import { canSeeAll } from "@/lib/permissions";
 import { cn } from "@/lib/utils";
 import { BarList } from "@/components/dashboard/bar-list";
 import { RevenueChart } from "@/components/dashboard/revenue-chart";
-import { compactFa, StatTile } from "@/components/dashboard/stat-tile";
+import { compactFa, KpiStrip, StatTile } from "@/components/dashboard/stat-tile";
+import { Segmented } from "@/components/app/segmented";
 import { EmptyState } from "@/components/app/empty-state";
 import { PageHeader } from "@/components/app/page-header";
 import { Button } from "@/components/ui/button";
@@ -43,24 +44,15 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
 
   return (
     <>
-      <PageHeader title={`سلام ${me.name}`} description={manager ? "نمای کلی فروش تیم" : "نمای کار و فروش شما"}>
-        <div className="inline-flex rounded-lg border p-0.5" role="tablist" aria-label="بازهٔ زمانی">
-          {(["week", "month"] as const).map((p) => (
-            <Link
-              key={p}
-              href={`?period=${p}`}
-              role="tab"
-              aria-selected={period === p}
-              className={cn("rounded-md px-3 py-1.5 text-sm", period === p ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground")}
-            >
-              {periodText[p].now}
-            </Link>
-          ))}
-        </div>
+      <PageHeader title="داشبورد" description={`${me.name} · ${manager ? "نمای کلی فروش تیم" : "کار و فروش شما"}`}>
+        <Segmented
+          label="بازهٔ زمانی"
+          items={(["week", "month"] as const).map((p) => ({ href: `?period=${p}`, label: periodText[p].now, active: period === p }))}
+        />
       </PageHeader>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        <StatTile hero label={`فروش ${t.now}`} value={formatToman(current.revenue)} current={current.revenue} previous={previous.revenue} periodLabel={t.prev} />
+      <KpiStrip>
+        <StatTile label={`فروش ${t.now}`} value={compactFa(current.revenue)} unit="تومان" current={current.revenue} previous={previous.revenue} periodLabel={t.prev} />
         <StatTile label="معامله موفق" value={current.wonCount.toLocaleString("fa-IR")} current={current.wonCount} previous={previous.wonCount} periodLabel={t.prev} />
         <StatTile label="لید جدید" value={current.leads.toLocaleString("fa-IR")} current={current.leads} previous={previous.leads} periodLabel={t.prev} />
         {manager ? (
@@ -68,7 +60,7 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
         ) : (
           <StatTile label="معامله باز" value={openCount.toLocaleString("fa-IR")} />
         )}
-      </div>
+      </KpiStrip>
 
       <div className="grid gap-4 lg:grid-cols-[1fr_24rem]">
         <Card>

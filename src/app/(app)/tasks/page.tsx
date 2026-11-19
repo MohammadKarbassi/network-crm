@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { endOfDay, startOfDay } from "date-fns-jalali";
 import { CalendarDays, CheckCircle2, List, Plus } from "lucide-react";
 import type { Prisma } from "@/generated/prisma/client";
@@ -7,8 +6,9 @@ import { canSeeAll } from "@/lib/permissions";
 import { cn } from "@/lib/utils";
 import { EmptyState } from "@/components/app/empty-state";
 import { PageHeader } from "@/components/app/page-header";
+import { Segmented } from "@/components/app/segmented";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { assignedTo } from "@/server/auth/scope";
 import { requireUser } from "@/server/auth/session";
@@ -68,17 +68,21 @@ export default async function TasksPage({ searchParams }: PageProps<"/tasks">) {
       { title: "پیش رو", tasks: rows.filter((t) => t.dueAt > endOfDay(now)) },
       { title: "انجام‌شده اخیر", tasks: done.map(toRow) },
     ].filter((g) => g.tasks.length);
+    // One list; each group is a header row inside it, not its own boxed card.
     body = groups.length ? (
-      groups.map((g) => (
-        <Card key={g.title} className="gap-0 py-0">
-          <CardHeader className="border-b py-3">
-            <CardTitle className="text-sm">
-              {g.title} <span className="font-normal text-muted-foreground">({g.tasks.length.toLocaleString("fa-IR")})</span>
-            </CardTitle>
-          </CardHeader>
-          <TaskList tasks={g.tasks} assignees={assignees} showAssignee={manager && who !== "me"} />
-        </Card>
-      ))
+      <Card className="gap-0 py-0">
+        {groups.map((g, i) => (
+          <section key={g.title} aria-label={g.title}>
+            <h2 className={cn("flex items-center gap-2 bg-muted/45 px-4 py-2 text-[12.5px] font-medium text-muted-foreground", i > 0 && "border-t")}>
+              {g.title}
+              <span className="rounded-md bg-background px-1.5 text-[11.5px] tabular-nums">{g.tasks.length.toLocaleString("fa-IR")}</span>
+            </h2>
+            <div className="border-t">
+              <TaskList tasks={g.tasks} assignees={assignees} showAssignee={manager && who !== "me"} />
+            </div>
+          </section>
+        ))}
+      </Card>
     ) : (
       <Card>
         <EmptyState icon={CheckCircle2} title="تسکی ندارید" description="کارهای پیگیری، تماس‌ها و جلسه‌ها را اینجا برنامه‌ریزی کنید." />
@@ -103,24 +107,13 @@ export default async function TasksPage({ searchParams }: PageProps<"/tasks">) {
       </PageHeader>
 
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <div className="inline-flex rounded-lg border p-0.5" role="tablist" aria-label="نما">
-          {(
-            [
-              ["list", "فهرست", List],
-              ["calendar", "تقویم", CalendarDays],
-            ] as const
-          ).map(([v, label, Icon]) => (
-            <Link
-              key={v}
-              href={tab(v)}
-              role="tab"
-              aria-selected={view === v}
-              className={cn("flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm", view === v ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground")}
-            >
-              <Icon className="size-4" /> {label}
-            </Link>
-          ))}
-        </div>
+        <Segmented
+          label="نما"
+          items={[
+            { href: tab("list"), label: <><List /> فهرست</>, active: view === "list" },
+            { href: tab("calendar"), label: <><CalendarDays /> تقویم</>, active: view === "calendar" },
+          ]}
+        />
         {assignees && (
           <form className="flex gap-2">
             <input type="hidden" name="view" value={view} />
