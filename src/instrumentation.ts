@@ -5,6 +5,9 @@ export async function register() {
   // Day boundaries (today's tasks, month grid, "this week" stats) are Tehran days, even on a UTC server.
   process.env.TZ ??= "Asia/Tehran";
   if (process.env.RUN_WORKER === "false") return;
+  // `next build` runs this in its page workers too. Redis sits on Liara's private network and is
+  // unreachable there, so starting workers would retry forever and stall the 5-minute build.
+  if (process.env.NEXT_PHASE === "phase-production-build") return;
   const { startWorkers } = await import("@/server/queue/worker");
   startWorkers();
 }
