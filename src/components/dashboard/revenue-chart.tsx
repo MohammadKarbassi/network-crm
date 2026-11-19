@@ -3,6 +3,7 @@
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { formatToman } from "@/lib/labels";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 // Single series in the brand accent, no legend; the card title names it.
 // Axis ticks are plain numbers in millions: Persian words inside the LTR SVG would flip ("میلیون ۳۲۰").
@@ -11,6 +12,7 @@ const millions = (n: number) => (n / 1_000_000).toLocaleString("fa-IR", { maximu
 const config = { revenue: { label: "فروش", color: "var(--primary)" } } satisfies ChartConfig;
 
 export function RevenueChart({ data }: { data: { month: string; revenue: number; count: number }[] }) {
+  const reduced = useReducedMotion();
   return (
     <ChartContainer config={config} className="aspect-auto h-64 w-full" dir="ltr">
       {/* Reversed x-axis so time reads right-to-left like the rest of the page. */}
@@ -32,7 +34,13 @@ export function RevenueChart({ data }: { data: { month: string; revenue: number;
             />
           }
         />
-        <Bar dataKey="revenue" fill="var(--color-revenue)" radius={[4, 4, 0, 0]} maxBarSize={24} isAnimationActive={false} />
+        <Bar dataKey="revenue" fill="var(--color-revenue)" radius={[4, 4, 0, 0]} maxBarSize={24}
+          // Bars rise once on load, after the card itself has settled; off under reduced motion.
+          isAnimationActive={!reduced}
+          animationBegin={160}
+          animationDuration={700}
+          animationEasing="ease-out"
+        />
       </BarChart>
     </ChartContainer>
   );

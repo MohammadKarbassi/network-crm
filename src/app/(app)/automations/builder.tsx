@@ -97,7 +97,7 @@ export function AutomationBuilder({ id, initial }: { id?: string; initial: Autom
         {state.steps.map((step, i) => {
           const Icon = stepIcon[step.type];
           return (
-            <div key={i} className="flex flex-col items-stretch">
+            <div key={i} className="flex flex-col items-stretch transition-[opacity,translate] duration-300 ease-out starting:-translate-y-1.5 starting:opacity-0">
               <div className="mx-auto h-6 w-px bg-border" aria-hidden />
               <Card>
                 <CardHeader className="flex flex-row items-center gap-3">

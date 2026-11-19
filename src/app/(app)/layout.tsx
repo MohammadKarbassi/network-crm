@@ -16,7 +16,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
         <AppSidebar user={user} dueTasks={dueTasks} />
         <SidebarInset className="min-w-0">
           <MobileBar />
-          <div className="flex flex-1 flex-col gap-5 px-4 pt-4 pb-10 md:px-8 md:pt-6">{children}</div>
+          <div className="flex flex-1 flex-col px-4 pt-4 pb-10 md:px-8 md:pt-6">{children}</div>
         </SidebarInset>
       </SidebarProvider>
     </CommandPalette>

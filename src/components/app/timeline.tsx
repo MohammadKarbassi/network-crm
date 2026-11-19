@@ -21,7 +21,7 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
       {items.map((a) => {
         const Icon = icons[a.type];
         return (
-          <li key={a.id} className="flex gap-3">
+          <li key={a.id} className="flex gap-3 transition-[opacity,translate] duration-300 ease-out starting:translate-y-1.5 starting:opacity-0">
             <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-muted">
               <Icon className="size-4 text-muted-foreground" />
             </div>

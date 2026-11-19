@@ -31,6 +31,8 @@ export function TaskList({ tasks, assignees, showAssignee }: { tasks: TaskRow[];
   const toggle = (t: TaskRow, done: boolean) =>
     startTransition(async () => {
       setDone({ id: t.id, done });
+      // Let the tick and strike line play before the server moves the task to its new group.
+      await new Promise((r) => setTimeout(r, 350));
       const res = await toggleTaskAction(t.id, done);
       if (!res.ok) toast.error(res.error);
     });
@@ -57,7 +59,11 @@ export function TaskList({ tasks, assignees, showAssignee }: { tasks: TaskRow[];
                 aria-label={t.doneAt ? `برگرداندن «${t.title}» به انجام‌نشده` : `علامت انجام برای «${t.title}»`}
               />
               <div className="min-w-0 flex-1">
-                <p className={cn("text-sm font-medium", t.doneAt && "text-muted-foreground line-through")}>{t.title}</p>
+                <p className="text-sm font-medium">
+                  <span data-done={!!t.doneAt} className="strike data-[done=true]:text-muted-foreground">
+                    {t.title}
+                  </span>
+                </p>
                 {t.description && <p className="mt-0.5 text-xs text-muted-foreground">{t.description}</p>}
                 <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
                   <span className={cn(overdue && "font-medium text-destructive")}>

@@ -6,14 +6,20 @@ export function BarList({ rows, empty }: { rows: { label: string; value: number;
   if (!max) return <p className="py-6 text-center text-sm text-muted-foreground">{empty}</p>;
   return (
     <ul className="flex flex-col gap-3">
-      {rows.map((r) => (
+      {rows.map((r, i) => (
         <li key={r.label}>
           <Tooltip>
             <TooltipTrigger asChild>
               <div className="grid grid-cols-[6.5rem_1fr_auto] items-center gap-3 text-sm" tabIndex={0}>
                 <span className="truncate text-muted-foreground">{r.label}</span>
                 <div className="h-3 rounded-e bg-transparent">
-                  {r.value > 0 && <div className="h-full rounded-e-[4px] bg-primary/80" style={{ width: `${(r.value / max) * 100}%`, minWidth: 4 }} />}
+                  {r.value > 0 && (
+                    // Grows from the start edge on load (staggered); width eases when the period changes.
+                    <div
+                      className="h-full animate-grow-x rounded-e-[4px] bg-primary/80 transition-[width] duration-500 ease-out ltr:origin-left rtl:origin-right"
+                      style={{ width: `${(r.value / max) * 100}%`, minWidth: 4, animationDelay: `${120 + i * 50}ms` }}
+                    />
+                  )}
                 </div>
                 <span className="text-end font-medium tabular-nums">{r.display}</span>
               </div>

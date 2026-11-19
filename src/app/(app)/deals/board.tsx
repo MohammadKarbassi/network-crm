@@ -8,6 +8,8 @@ import {
   KeyboardSensor,
   PointerSensor,
   closestCorners,
+  defaultDropAnimationSideEffects,
+  type DropAnimation,
   useDroppable,
   useSensor,
   useSensors,
@@ -30,6 +32,13 @@ import { DealFormDialog, type DealFormValue } from "./deal-form-dialog";
 
 export type BoardDeal = DealFormValue & { customerName: string; ownerName: string | null };
 type Columns = Record<DealStage, BoardDeal[]>;
+
+// The lifted card settles into its slot with the app's ease-out instead of dnd-kit's default ease.
+const dropAnimation: DropAnimation = {
+  duration: 220,
+  easing: "cubic-bezier(0.23, 1, 0.32, 1)",
+  sideEffects: defaultDropAnimationSideEffects({ styles: { active: { opacity: "0.4" } } }),
+};
 
 const stageDot: Record<DealStage, string> = {
   NEW: "bg-sky-500",
@@ -147,7 +156,7 @@ export function Board({ deals, owners, openId }: { deals: BoardDeal[]; owners?: 
             ))}
           </div>
         </div>
-        <DragOverlay>{active && <DealCard deal={active} overlay />}</DragOverlay>
+        <DragOverlay dropAnimation={dropAnimation}>{active && <DealCard deal={active} overlay />}</DragOverlay>
       </DndContext>
 
       {editing && (
@@ -196,7 +205,7 @@ function Column({ stage, deals, onOpen }: { stage: DealStage; deals: BoardDeal[]
 }
 
 function SortableCard({ deal, onOpen }: { deal: BoardDeal; onOpen: (d: BoardDeal) => void }) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: deal.id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: deal.id, transition: { duration: 200, easing: "cubic-bezier(0.23, 1, 0.32, 1)" } });
   return (
     <div
       ref={setNodeRef}
@@ -221,7 +230,7 @@ function DealCard({ deal, overlay }: { deal: BoardDeal; overlay?: boolean }) {
     <article
       className={cn(
         "cursor-grab rounded-lg border bg-card p-3 text-[13px] transition-colors duration-150 hover:border-foreground/20 active:cursor-grabbing",
-        overlay && "rotate-[1.5deg] shadow-overlay",
+        overlay && "animate-lift scale-[1.02] rotate-[1.5deg] shadow-overlay",
       )}
     >
       <h3 className="leading-snug font-semibold">{deal.title}</h3>

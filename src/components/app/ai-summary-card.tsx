@@ -40,7 +40,8 @@ export function AiSummaryCard({ summarize }: { summarize: () => Promise<{ ok: tr
             <Skeleton className="h-4 w-3/5" />
           </>
         ) : data ? (
-          <>
+          // Keyed by the summary so a refresh replays the entrance; risks and the next step follow the summary.
+          <div key={data.summary} className="stagger flex flex-col gap-3">
             {data.score && (
               <p className="flex items-center gap-2">
                 امتیاز لید: <ScoreBadge score={data.score.value} band={data.score.band} />
@@ -59,7 +60,7 @@ export function AiSummaryCard({ summarize }: { summarize: () => Promise<{ ok: tr
             <p className="flex gap-2 rounded-md bg-muted p-3 font-medium">
               <ArrowLeft className="mt-0.5 size-4 shrink-0" /> {data.nextStep}
             </p>
-          </>
+          </div>
         ) : (
           <p className="text-muted-foreground">قبل از تماس، تاریخچه را در چند خط مرور کنید: چه گذشته، چه ریسکی هست و قدم بعدی چیست.</p>
         )}

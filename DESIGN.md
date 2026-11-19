@@ -283,13 +283,27 @@ Columns are 10px beds of muted warm (no border). Each header has an 8px stage do
 ⌘K or Ctrl K, or the sidebar trigger, opens a dialog up to 36rem wide with an RTL command list. Results come from the server after 2+ characters (180ms debounce, spinner on the end side) and are grouped as customers, leads and deals, each with a secondary-ink icon and a subtitle on the end side. A "رفتن به" group lists the nav pages, from the same `nav.ts` source as the sidebar.
 
 ### Charts
-**The One Series Rule.** Charts show a single series in firouzeh with no legend, because the card title names the series. Load animation is off (`isAnimationActive={false}`). Bars have a 4px top radius and are at most 24px wide. Gridlines are horizontal hairlines only. The SVG is `dir="ltr"` with a reversed x-axis, so time still reads right to left, and the y-axis sits on the right with plain Persian numbers in millions (no Persian words inside the SVG, which would flip). The tooltip content is RTL and shows the formatted Toman amount. Bar lists are plain HTML in firouzeh at 80%, and every value is printed.
+**The One Series Rule.** Charts show a single series in firouzeh with no legend, because the card title names the series. On load the bars rise once (Recharts, 160ms delay, 700ms ease-out), and the animation is off under reduced motion. Bars have a 4px top radius and are at most 24px wide. Gridlines are horizontal hairlines only. The SVG is `dir="ltr"` with a reversed x-axis, so time still reads right to left, and the y-axis sits on the right with plain Persian numbers in millions (no Persian words inside the SVG, which would flip). The tooltip content is RTL and shows the formatted Toman amount. Bar lists are plain HTML in firouzeh at 80%, and every value is printed. Their bars grow from the start edge on load (staggered 50ms), and their width eases over 500ms when the period changes.
 
 ### Login
 A split view. The form side has the logo, a 24px bold title, the phone field (44px, LTR) and a 44px primary button. The `lg`+ aside is login-night with the pipeline motif: six lanes of firouzeh hairlines with faint cards, fading toward the bottom.
 
 ### Logo
 A three-node network mark: an 8px-radius firouzeh tile with three near-white nodes joined by 70% strokes, followed by «نتورک» in 15px bold.
+
+## Motion
+
+**The One Ease Rule.** Everything that enters uses `--ease-out` (`cubic-bezier(0.23, 1, 0.32, 1)`) and moves only `transform`/`opacity` (`translate`, `scale`, `rotate`). Tokens and keyframes live in `globals.css`: `animate-rise`, `animate-grow-x`, `animate-pop`, `animate-lift`, `animate-travel`, plus the `stagger` and `strike` utilities. Tailwind only emits `@theme` keyframes that an `--animate-*` token uses, so each new keyframe gets a token.
+
+- **Page entrance:** `(app)/template.tsx` adds `stagger` on every top-level page change. Sections rise 6px over 280ms, 40ms apart. Search-param changes (filters, period) don't replay it.
+- **KPIs:** cells stagger in. The value and delta chip are keyed by value, so switching the period makes the new number rise in.
+- **Kanban:** the picked-up card lifts (scale 1.02, 1.5° tilt, 160ms), cards shift aside over 200ms, and the drop settles over 220ms with the same ease.
+- **Tasks:** the check mark pops in (180ms) and a strike line draws from the start edge (260ms). The server call waits 350ms so the feedback shows before the task moves to its new group.
+- **AI results:** the summary and suggestion panel stagger in. New timeline entries and automation steps enter with `@starting-style` (`starting:` variant).
+- **Buttons:** press is `scale(0.97)`.
+- **Login (delight budget):** the lanes fade in, then one deal card hops lane by lane toward «موفق» in a 15s loop.
+- **No motion:** the ⌘K palette (keyboard, many times a day) opens instantly. Hover never moves anything.
+- **Reduced motion:** `--rise-y` drops to 0, and pop, grow and lift become fades. The login card is hidden, the strike is instant and Recharts doesn't animate.
 
 ## Do's and Don'ts
 
@@ -305,6 +319,6 @@ A three-node network mark: an 8px-radius firouzeh tile with three near-white nod
 - **Don't** use firouzeh for decoration, section fills, illustrations in the app, or a second data series.
 - **Don't** put shadows on resting surfaces. Cards, tables, columns and dialogs separate by hairline and tone.
 - **Don't** build hero blocks, oversized headings (over 16px in the app), or rows of separate KPI cards.
-- **Don't** add chart legends, multi-series color sets or entry animations.
+- **Don't** add chart legends or multi-series color sets. Charts animate only once on load; never loop, pulse or animate on hover.
 - **Don't** put Persian words inside the LTR chart SVG. Format ticks as numbers and name the unit in the card title.
 - **Don't** use Latin digits for counts, amounts, dates or percentages.

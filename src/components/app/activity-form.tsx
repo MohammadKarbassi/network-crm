@@ -132,7 +132,7 @@ function SuggestionPanel({
   ].filter((r) => !!r);
 
   return (
-    <div className="flex flex-col gap-3 rounded-lg border border-violet-200 bg-violet-50/60 p-4 dark:border-violet-900 dark:bg-violet-950/30">
+    <div className="stagger flex flex-col gap-3 rounded-lg border border-violet-200 bg-violet-50/60 p-4 dark:border-violet-900 dark:bg-violet-950/30">
       <p className="flex items-center gap-2 text-sm font-medium">
         <Sparkles className="size-4 text-violet-600" /> پیشنهاد هوش مصنوعی
       </p>
