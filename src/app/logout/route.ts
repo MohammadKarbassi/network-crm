@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
 import { destroySession } from "@/server/auth/session";
 
-export async function POST(req: Request) {
+export async function POST() {
   await destroySession();
-  return NextResponse.redirect(new URL("/login", req.url), 303);
+  // Relative Location on purpose: behind Liara's proxy `req.url` is the container's
+  // own address (https://0.0.0.0:3000), so an absolute URL built from it breaks.
+  return new Response(null, { status: 303, headers: { Location: "/login" } });
 }
